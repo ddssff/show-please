@@ -1,0 +1,18 @@
+Name:           showplease
+Version:        0.1
+License:        BSD3
+Author:         David Fox <dsf@seereason.com>
+Category:       debug
+Maintainer:     David Fox <dsf@seereason.com>
+Homepage:       http://src.seereason.com/showplease
+Build-Type:     Simple
+Synopsis:       Show class with instances for types whose official show won't read
+Cabal-Version: >= 1.9
+
+Library
+ Build-Depends:
+  base >= 4
+ Exposed-Modules:
+  Debug.ShowPlease
+ Other-Modules:
+  Debug.ShowPrime
