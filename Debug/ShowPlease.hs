@@ -17,7 +17,8 @@
 -- @
 
 module Debug.ShowPlease
-    ( V(V)
+    ( Please.Show(..)
+    , V(V)
     ) where
 
 import GHC.Base
