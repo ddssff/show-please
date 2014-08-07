@@ -26,12 +26,16 @@ import GHC.IO.Exception
 import GHC.IO.Handle
 import GHC.Show
 import qualified Debug.ShowPrime as Please
+import Text.Parsec.Error
+import Text.Parsec.Pos
 
 newtype V a = V a
 
 -- Slip in our alternative show to show something wrapped in V.
 instance Please.Show a => Show (V a) where
     show (V a) = Please.show a
+
+-- Alternative show instances
 
 instance Please.Show CInt where show = show
 instance Please.Show Handle where show = show
@@ -68,3 +72,16 @@ instance Please.Show IOErrorType where
     show Interrupted = "Interrupted"
 
 -- instance Please.Show ControlFileError where show = show
+
+instance Please.Show ParseError where
+    show e = "newErrorMessage " ++ Please.show (errorPos e) ++ " " ++ Please.show (errorMessages e)
+
+instance Please.Show Message where
+    show (SysUnExpect s) = "SysUnExpect " ++ show s
+    show (UnExpect s) = "UnExpect " ++ show s
+    show (Expect s) = "Expect " ++ show s
+    show (Message s) = "Message " ++ show s
+
+instance Please.Show SourcePos where
+    show pos =
+        "(newPos " ++ show (sourceName pos) ++ " " ++ show (sourceLine pos) ++ " " ++ show (sourceColumn pos) ++ ")"
