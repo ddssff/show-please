@@ -32,6 +32,9 @@ import Text.Parsec.Pos
 
 newtype V a = V a
 
+instance Eq a => Eq (V a) where
+    (V a) == (V b) = a == b
+
 -- Slip in our alternative show to show something wrapped in V.
 instance Please.Show a => Show (V a) where
     show (V a) = Please.show a
