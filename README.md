@@ -1,10 +1,10 @@
 Debugging Tools
 ===============
 
-Debug.ShowPlease
------------------
+Debug.Show
+----------
 
-This module exports the class Please.Show, which is a duplicate of the
+This module exports a class Show, which is a duplicate of the
 standard system Show, along with a collection of Please.Show instances
 (initially for the types in Control.Exception) that actually display
 the values as a Haskell expression, so that they can be fully
@@ -34,6 +34,8 @@ Language.Haskell.TH.Syntax.  It may be used for constructing error
 messages, e.g.
 
     throw $ MyException $__LOC__
+
+(Submitted for inclusion in https://github.com/gregwebs/FileLocation.hs)
 
 Debug.Console
 -------------
