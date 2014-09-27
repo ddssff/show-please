@@ -11,8 +11,9 @@ Cabal-Version: >= 1.9
 
 Library
  Build-Depends:
-  base >= 4, parsec, template-haskell
+  base >= 4, mtl, parsec, template-haskell
  Exposed-Modules:
+  Debug.Console,
   Debug.Loc,
   Debug.Show
  Other-Modules:
