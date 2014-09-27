@@ -16,7 +16,7 @@
 --   user error (hello)
 -- @
 
-module Debug.ShowPlease
+module Debug.Show
     ( Please.Show(..)
     , V(V)
     ) where
@@ -26,7 +26,7 @@ import Foreign.C.Types
 import GHC.IO.Exception
 import GHC.IO.Handle
 import GHC.Show
-import qualified Debug.ShowPrime as Please
+import qualified Debug.CopyOfShow as Please
 import Text.Parsec.Error
 import Text.Parsec.Pos
 

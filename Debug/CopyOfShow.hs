@@ -20,7 +20,7 @@
 -- BASE should be 10^DIGITS. Note that ^ is not available yet.
 #endif
 
-module Debug.ShowPrime
+module Debug.CopyOfShow
         (
         Show(..), ShowS,
 
