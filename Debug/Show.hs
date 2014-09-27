@@ -1,5 +1,5 @@
-{-# LANGUAGE CPP, FlexibleInstances, BangPatterns, NoImplicitPrelude, StandaloneDeriving,
-             MagicHash, UnboxedTuples #-}
+{-# LANGUAGE CPP, FlexibleContexts, FlexibleInstances, BangPatterns, NoImplicitPrelude, StandaloneDeriving,
+             MagicHash, UnboxedTuples, UndecidableInstances #-}
 {-# OPTIONS_GHC -Wall -fno-warn-orphans #-}
 -- | A wrapper type 'V' which has alternative instances of Show for
 -- certain types whose official Show instances produce strings that
@@ -21,6 +21,8 @@ module Debug.Show
     , V(V)
     ) where
 
+import Control.Exception
+import Data.Maybe
 import GHC.Base
 import Foreign.C.Types
 import GHC.IO.Exception
@@ -89,3 +91,55 @@ instance Please.Show Message where
 instance Please.Show SourcePos where
     show pos =
         "(newPos " ++ show (sourceName pos) ++ " " ++ show (sourceLine pos) ++ " " ++ show (sourceColumn pos) ++ ")"
+
+instance Please.Show SomeException where
+    show e =
+        "toException (" ++
+            (maybeFrom (v (fromException e :: Maybe ArithException)) $
+             maybeFrom (v (fromException e :: Maybe ArrayException)) $
+             maybeFrom (v (fromException e :: Maybe AssertionFailed)) $
+             maybeFrom (v (fromException e :: Maybe AsyncException)) $
+             maybeFrom (v (fromException e :: Maybe BlockedIndefinitelyOnMVar)) $
+             maybeFrom (v (fromException e :: Maybe BlockedIndefinitelyOnSTM)) $
+             maybeFrom (v (fromException e :: Maybe Deadlock)) $
+             -- maybeFrom (v (fromException e :: Maybe Dynamic)) $
+             maybeFrom (v (fromException e :: Maybe ErrorCall)) $
+             maybeFrom (v (fromException e :: Maybe ExitCode)) $
+             maybeFrom (v (fromException e :: Maybe IOException)) $
+             maybeFrom (v (fromException e :: Maybe NestedAtomically)) $
+             maybeFrom (v (fromException e :: Maybe NoMethodError)) $
+             maybeFrom (v (fromException e :: Maybe NonTermination)) $
+             maybeFrom (v (fromException e :: Maybe PatternMatchFail)) $
+             maybeFrom (v (fromException e :: Maybe RecConError)) $
+             maybeFrom (v (fromException e :: Maybe RecSelError)) $
+             maybeFrom (v (fromException e :: Maybe RecUpdError)) $
+             maybeFrom (v (fromException e :: Maybe SomeAsyncException)) $
+             ("No Debug.Show instance for " ++ show e)) ++ ")"
+
+-- I don't know exactly what these do - they may need to be implemented
+-- in more detail, but at least we can tell they name of their type now.
+instance Please.Show ArithException where show e = "ArithException: " ++ show e
+instance Please.Show ArrayException where show e = "ArrayException: " ++ show e
+instance Please.Show AssertionFailed where show e = "AssertionFailed: " ++ show e
+instance Please.Show AsyncException where show e = "AsyncException: " ++ show e
+instance Please.Show BlockedIndefinitelyOnMVar where show e = "BlockedIndefinitelyOnMVar: " ++ show e
+instance Please.Show BlockedIndefinitelyOnSTM where show e = "BlockedIndefinitelyOnSTM: " ++ show e
+instance Please.Show Deadlock where show e = "Deadlock: " ++ show e
+-- instance Please.Show Dynamic where show e = "Dynamic: " ++ show e
+instance Please.Show ErrorCall where show e = "ErrorCall: " ++ show e
+instance Please.Show ExitCode where show e = "ExitCode: " ++ show e
+-- instance Please.Show IOException where show e = "IOException: " ++ show e -- defined above
+instance Please.Show NestedAtomically where show e = "NestedAtomically: " ++ show e
+instance Please.Show NoMethodError where show e = "NoMethodError: " ++ show e
+instance Please.Show NonTermination where show e = "NonTermination: " ++ show e
+instance Please.Show PatternMatchFail where show e = "PatternMatchFail: " ++ show e
+instance Please.Show RecConError where show e = "RecConError: " ++ show e
+instance Please.Show RecSelError where show e = "RecSelError: " ++ show e
+instance Please.Show RecUpdError where show e = "RecUpdError: " ++ show e
+instance Please.Show SomeAsyncException where show e = "SomeAsyncException: " ++ show e
+
+v :: (Please.Show a, Functor f) => f a -> f String
+v = fmap Please.show
+
+maybeFrom :: Maybe c -> c -> c
+maybeFrom = flip fromMaybe
