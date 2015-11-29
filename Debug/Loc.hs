@@ -5,8 +5,6 @@ import Control.Applicative
 import Language.Haskell.TH
 import Language.Haskell.TH.Syntax
 
-deriving instance Show Loc
-
 instance Lift Loc where
     lift x = recConE 'Loc [ (,) <$> (pure 'loc_filename) <*> litE (stringL (loc_filename x))
                           , (,) <$> (pure 'loc_package) <*> litE (stringL (loc_package x))
