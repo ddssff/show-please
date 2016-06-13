@@ -4,6 +4,7 @@ show-exception (0.3) unstable; urgency=low
     template haskell and insert it into an exception.
   * Rename package to show-exception, eliminate copy of Show class,
     just use Show instances of types wrapped in the newtype V.
+  * Improve README.md.
 
  -- David Fox <dsf@seereason.com>  Thu, 07 Aug 2014 15:15:44 -0700
 
