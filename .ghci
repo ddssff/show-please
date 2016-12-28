@@ -1,3 +1,4 @@
 :set -fobject-code
 :set -XScopedTypeVariables
 :m +Control.Concurrent Control.Exception System.IO
+:set prompt "λ> "

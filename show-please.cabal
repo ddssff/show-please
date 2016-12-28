@@ -1,15 +1,15 @@
-Name:           show-exception
+Name:           show-please
 Version:        0.3
 License:        BSD3
 Author:         David Fox <dsf@seereason.com>
 Category:       debug
 Maintainer:     David Fox <dsf@seereason.com>
-Homepage:       https://github.com/seereason/show-exception
+Homepage:       https://github.com/ddssff/show-please
 Build-Type:     Simple
 Synopsis:       A wrapper type V with improved Show instances
 Description: Provides Show instances for various types whose official
   Show won't Read. This is particularly intended for exception types,
-  which can show up unexpectedly and be difficult to track down.
+  which can appear unexpectedly and be difficult to track down.
 Cabal-Version: >= 1.9
 
 Library

@@ -1,7 +1,7 @@
 Debugging Tools
 ===============
 
-System.ShowBetter
+Debug.Show
 ----------
 
 This module exports a type V(V), along with a collection of Show instances
@@ -17,9 +17,10 @@ understood and used by the Read class.
 Some exception types have less detailed Show implementations, but at
 least they include the type name:
 
-    > putStrLn (show (SomeException (ErrorCall "abc")))
+    > Left (e :: SomeException) <- (try (error "abc"))
+    > putStrLn (show e)
     abc
-    > putStrLn (show (V (SomeException (ErrorCall "abc"))))
+    > putStrLn (show (V e))
     toException (ErrorCall: abc :: ErrorCall)
 
 Now you can see what the real type of a SomeException is:

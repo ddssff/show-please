@@ -80,8 +80,8 @@ instance Show (V SomeException) where
              maybeFrom (fmap ((++ " :: RecSelError") . show . V) (fromException e :: Maybe RecSelError)) $
              maybeFrom (fmap ((++ " :: RecUpdError") . show . V) (fromException e :: Maybe RecUpdError)) $
              maybeFrom (fmap ((++ " :: SomeAsyncException") . show . V) (fromException e :: Maybe SomeAsyncException)) $
-             ("No Show instance for V " ++ show e ++ ", report this as a bug at https://github.com/seereason/showexception")) ++ ")"
- 
+             ("No Show instance for V " ++ show e ++ ", report this as a bug at https://github.com/seereason/show-please")) ++ ")"
+
 -- I don't know exactly what these do - they may need to be implemented
 -- in more detail, but at least we can tell they name of their type now.
 instance Show (V ArithException) where show (V e) = "ArithException: " ++ show e
