@@ -7,6 +7,7 @@ module Debug.Show (V(V)) where
 
 import Control.Exception
 import Data.Maybe
+import Data.Time
 import Foreign.C.Types
 import GHC.Base
 import GHC.IO.Exception
@@ -106,3 +107,6 @@ instance Show (V SomeAsyncException) where show (V e) = "SomeAsyncException: " +
 
 maybeFrom :: Maybe c -> c -> c
 maybeFrom = flip fromMaybe
+
+instance Show (V UTCTime) where
+    show (V t) = "(read " ++ show (show t) ++ " :: UTCTime)"
