@@ -13,6 +13,7 @@ import GHC.Base
 import GHC.IO.Exception
 import GHC.IO.Handle
 import GHC.Show
+import Language.Haskell.TH.Syntax
 import Text.Parsec.Error
 import Text.Parsec.Pos
 
@@ -110,3 +111,16 @@ maybeFrom = flip fromMaybe
 
 instance Show (V UTCTime) where
     show (V t) = "(read " ++ show (show t) ++ " :: UTCTime)"
+
+instance Show (V Name) where
+    show (V (Name o f)) = "Name (" ++ show o ++ ") (" ++ show (V f) ++ ")"
+instance Show (V NameFlavour) where
+    show (V NameS) = "NameS"
+    show (V (NameQ m)) = "NameQ " ++ show m
+    show (V (NameU n)) = "NameU " ++ show n
+    show (V (NameL n)) = "NameL " ++ show n
+    show (V (NameG s p m)) = "NameG (" ++ show (s) ++ ") (" ++ show (p) ++ ") (" ++ show (m) ++ ")"
+instance Show NameSpace where
+    show VarName = "VarName"
+    show DataName = "DataName"
+    show TcClsName = "TcClsName"
