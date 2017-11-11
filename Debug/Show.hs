@@ -1,7 +1,7 @@
 -- | A wrapper type and associated Show instances that generate
 -- correct haskell code, especially for exception types.
 
-{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE CPP, FlexibleInstances #-}
 
 module Debug.Show (V(V)) where
 
@@ -120,7 +120,9 @@ instance Show (V NameFlavour) where
     show (V (NameU n)) = "NameU " ++ show n
     show (V (NameL n)) = "NameL " ++ show n
     show (V (NameG s p m)) = "NameG (" ++ show (s) ++ ") (" ++ show (p) ++ ") (" ++ show (m) ++ ")"
+#if !MIN_VERSION_template_haskell(2,11,0)
 instance Show NameSpace where
     show VarName = "VarName"
     show DataName = "DataName"
     show TcClsName = "TcClsName"
+#endif
