@@ -1,5 +1,5 @@
 Name:           show-please
-Version:        0.5
+Version:        0.5.1
 License:        BSD3
 Author:         David Fox <dsf@seereason.com>
 Category:       debug
@@ -14,6 +14,6 @@ Cabal-Version: >= 1.9
 
 Library
  Build-Depends:
-  base >= 4 && < 5, mtl, parsec, template-haskell, time >= 1.5
+  base >= 4 && < 5, mtl, parsec, template-haskell, th-orphans, time >= 1.5
  Exposed-Modules:
   Debug.Show

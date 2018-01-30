@@ -13,6 +13,7 @@ import GHC.Base
 import GHC.IO.Exception
 import GHC.IO.Handle
 import GHC.Show
+import Language.Haskell.TH.Instances ()
 import Language.Haskell.TH.Syntax
 import Text.Parsec.Error
 import Text.Parsec.Pos
@@ -120,9 +121,3 @@ instance Show (V NameFlavour) where
     show (V (NameU n)) = "NameU " ++ show n
     show (V (NameL n)) = "NameL " ++ show n
     show (V (NameG s p m)) = "NameG (" ++ show (s) ++ ") (" ++ show (p) ++ ") (" ++ show (m) ++ ")"
-#if !MIN_VERSION_template_haskell(2,11,0)
-instance Show NameSpace where
-    show VarName = "VarName"
-    show DataName = "DataName"
-    show TcClsName = "TcClsName"
-#endif
