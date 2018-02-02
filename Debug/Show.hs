@@ -2,7 +2,7 @@
 -- correct haskell code, especially for exception types.
 
 {-# LANGUAGE CPP, FlexibleInstances #-}
-{-# OPTIONS -Wincomplete-patterns -Werror #-}
+{-# OPTIONS -Wall -Werror #-}
 
 module Debug.Show (V(V)) where
 import Control.Exception
