@@ -2,17 +2,17 @@
 -- correct haskell code, especially for exception types.
 
 {-# LANGUAGE CPP, FlexibleInstances #-}
+{-# OPTIONS -Wincomplete-patterns -Werror #-}
 
 module Debug.Show (V(V)) where
-
 import Control.Exception
 import Data.Maybe
 import Data.Time
-import Foreign.C.Types
-import GHC.Base
+-- import Foreign.C.Types
+-- import GHC.Base
 import GHC.IO.Exception
-import GHC.IO.Handle
-import GHC.Show
+-- import GHC.IO.Handle
+-- import GHC.Show
 import Language.Haskell.TH.Instances ()
 import Language.Haskell.TH.Syntax
 import Text.Parsec.Error
@@ -95,7 +95,7 @@ instance Show (V BlockedIndefinitelyOnMVar) where show (V e) = "BlockedIndefinit
 instance Show (V BlockedIndefinitelyOnSTM) where show (V e) = "BlockedIndefinitelyOnSTM: " ++ show e
 instance Show (V Deadlock) where show (V e) = "Deadlock: " ++ show e
 -- instance Show (V Dynamic) where show (V e) = "Dynamic: " ++ show e
-instance Show (V ErrorCall) where show (V (ErrorCall s)) = "ErrorCall " ++ show s
+instance Show (V ErrorCall) where show (V (ErrorCallWithLocation s t)) = "ErrorCallWithLocation " ++ show s ++ " " ++ show t
 instance Show (V ExitCode) where show (V e) = "ExitCode: " ++ show e
 -- instance Show (V IOException) where show (V e) = "IOException: " ++ show e -- defined above
 instance Show (V NestedAtomically) where show (V e) = "NestedAtomically: " ++ show e
