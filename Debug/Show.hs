@@ -95,8 +95,11 @@ instance Show (V BlockedIndefinitelyOnMVar) where show (V e) = "BlockedIndefinit
 instance Show (V BlockedIndefinitelyOnSTM) where show (V e) = "BlockedIndefinitelyOnSTM: " ++ show e
 instance Show (V Deadlock) where show (V e) = "Deadlock: " ++ show e
 -- instance Show (V Dynamic) where show (V e) = "Dynamic: " ++ show e
+#if MIN_VERSION_base(4,9,0)
 instance Show (V ErrorCall) where show (V (ErrorCallWithLocation s t)) = "ErrorCallWithLocation " ++ show s ++ " " ++ show t
+#else
 instance Show (V ExitCode) where show (V e) = "ExitCode: " ++ show e
+#endif
 -- instance Show (V IOException) where show (V e) = "IOException: " ++ show e -- defined above
 instance Show (V NestedAtomically) where show (V e) = "NestedAtomically: " ++ show e
 instance Show (V NoMethodError) where show (V e) = "NoMethodError: " ++ show e
