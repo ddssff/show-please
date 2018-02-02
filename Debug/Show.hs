@@ -98,8 +98,9 @@ instance Show (V Deadlock) where show (V e) = "Deadlock: " ++ show e
 #if MIN_VERSION_base(4,9,0)
 instance Show (V ErrorCall) where show (V (ErrorCallWithLocation s t)) = "ErrorCallWithLocation " ++ show s ++ " " ++ show t
 #else
-instance Show (V ExitCode) where show (V e) = "ExitCode: " ++ show e
+instance Show (V ErrorCall) where show (V (ErrorCall s)) = "ErrorCallWithLocation " ++ show s
 #endif
+instance Show (V ExitCode) where show (V e) = "ExitCode: " ++ show e
 -- instance Show (V IOException) where show (V e) = "IOException: " ++ show e -- defined above
 instance Show (V NestedAtomically) where show (V e) = "NestedAtomically: " ++ show e
 instance Show (V NoMethodError) where show (V e) = "NoMethodError: " ++ show e
