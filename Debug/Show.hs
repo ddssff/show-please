@@ -1,24 +1,22 @@
 -- | A wrapper type and associated Show instances that generate
 -- correct haskell code, especially for exception types.
 
-{-# LANGUAGE CPP, FlexibleInstances #-}
+{-# LANGUAGE CPP, DeriveDataTypeable, FlexibleInstances #-}
 {-# OPTIONS -Wall -Werror #-}
 
 module Debug.Show (V(V)) where
 import Control.Exception
+import Data.Data (Data)
 import Data.Maybe
 import Data.Time
--- import Foreign.C.Types
--- import GHC.Base
+import Data.Typeable (Typeable)
 import GHC.IO.Exception
--- import GHC.IO.Handle
--- import GHC.Show
 import Language.Haskell.TH.Instances ()
 import Language.Haskell.TH.Syntax
 import Text.Parsec.Error
 import Text.Parsec.Pos
 
-newtype V a = V a
+newtype V a = V a deriving (Eq, Ord, Data, Typeable)
 
 instance Show (V IOException) where
     show (V e) =
